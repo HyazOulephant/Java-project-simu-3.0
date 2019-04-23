@@ -7,7 +7,7 @@ public class Jeu {
 
         for( int i =0;i<nbVille;i++){
 
-            Ville ville = new Ville(nomVilles.get(i), 1);  // x un entier aleatoire representant le nombre de voiture creees par tour
+            Ville ville = new Ville(nomVilles.get(i), (int)(Math.random()*11));  // x un entier aleatoire representant le nombre de voiture creees par tour
             villes.add(ville);
         }
         for (Ville i : villes){
