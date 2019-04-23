@@ -24,8 +24,8 @@ public class Vehicule{
 	}
 
 	public void accelerer(){
-		if(this.vitesse<"max route"+chaufard)// peu etre implementer une variable qui renvoie a la route pour savoir instanceof => on sait a cb max elle doit rouler
-		vitesse+=10; // a determiner!
+		if(this.vitesse<0)// peu etre implementer une variable qui renvoie a la route pour savoir instanceof => on sait a cb max elle doit rouler
+			vitesse+=10; // a determiner!
 
 	}
 
