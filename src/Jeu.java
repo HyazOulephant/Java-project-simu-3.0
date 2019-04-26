@@ -28,13 +28,29 @@ public class Jeu {
 
 
     }
-    void DebutTour(){ // init de chaque tours
+    public void deplacementVehicules(){
+    	int compteur=0;
+    	for (Ville i : villes){
+    		for (int j=compteur;j<nbVille-1;j++){
+    			for ( Voie k : i.voies){
+    				for (Vehicule l : k.voitures){
+    					// test() ?
+    					l.accelerer(); // a faire
+					}
+				}
+			}
+    		compteur++;
+		}
+	}
+    public void DebutTour(){ // init de chaque tours
         for ( Ville i : villes){
             i.Generer_vehicule();
         }
         for ( Feu i : feux){
             i.tour();
         }
+
+        deplacementVehicules();
     }
 
     //public Vector<String> nomVilles = new Vector<>();

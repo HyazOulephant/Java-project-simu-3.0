@@ -15,11 +15,9 @@
         <entry file="file://$PROJECT_DIR$/src/Jeu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+              <caret line="9" column="77" selection-start-line="9" selection-start-column="77" selection-end-line="9" selection-end-column="77" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1228#1236#0" expanded="true" />
-                <element signature="e#243#250#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,9 +56,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+    <option name="x" value="951" />
+    <option name="width" value="978" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -68,29 +66,29 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="java-simulation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="java-simulation" type="462c0819:PsiDirectoryNode" />
+              <item name="Java project simu 3.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java project simu 3.0" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="java-simulation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="java-simulation" type="462c0819:PsiDirectoryNode" />
+              <item name="Java project simu 3.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java project simu 3.0" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556025788872" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Java project simu 3.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
@@ -147,7 +145,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.118120804" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.119463086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -203,13 +201,7 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="5" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="3" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/Voie.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -268,11 +260,9 @@
     <entry file="file://$PROJECT_DIR$/src/Jeu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+          <caret line="9" column="77" selection-start-line="9" selection-start-column="77" selection-end-line="9" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1228#1236#0" expanded="true" />
-            <element signature="e#243#250#0" expanded="true" />
           </folding>
         </state>
       </provider>
