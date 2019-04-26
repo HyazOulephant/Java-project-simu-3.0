@@ -1,11 +1,9 @@
-import java.util.Vector;
+import java.util.ArrayList;
 public class Voie {
 
     public int vitesse;
     public int nb_voies;
     public int distances;
-    public Vector<Vehicule> voitures = new Vector<>();
+    public ArrayList<Vehicule> voitures = new ArrayList<Vehicule>();
 
-    
-
- }
+}

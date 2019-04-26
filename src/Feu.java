@@ -3,8 +3,8 @@ public class Feu{
 	public int tours;
 
 	public Feu(String etat){
-	if(etat=="allume")this.etat=1;
-	else this.etat=0;
+		if(etat=="allume")this.etat=1;
+		else this.etat=0;
 	}
 	public void tour(){
 		if (this.tours==3){
