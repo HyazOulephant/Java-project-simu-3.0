@@ -11,14 +11,18 @@ public class Ville {
         this.nom=nom;
     }
 
-    void Generer_vehicule (){
+    void Generer_vehicule (ArrayList<Ville> villes,Ville j){
+
         for ( int i = 0;i<this.nbVehicules;i++){
             Vehicule car = new Vehicule("destination");
-            // nombre aleatoire dans le tableau deds nom de villes avec exceptoion pour la ville qui la genere
+            int valeur=(int)(Math.random()*11);
+            while((car.destination=villes.get(valeur).nom)==j.nom){
+                valeur=(int)(Math.random()*11);
+            }
+
             switch(car.destination){
                 case "Versailles" :
                     this.voies.get(1).voitures.add(car);break; // cas pour chaque ville dans lordre du tableau de nom de ville
-                // voir implementation de voies[] en java
                 case "Paris" :
                     this.voies.get(0).voitures.add(car);break;
                 case "Lille" :

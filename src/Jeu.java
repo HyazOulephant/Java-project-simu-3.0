@@ -3,23 +3,30 @@ import java.util.List;
 import java.util.Arrays;
 
 public class Jeu {
-    void init(){
+    public List<String> nomVilles = new ArrayList<String>(Arrays.asList("Paris", "Versailles", "Lille", "Marseilles", "Lyon", "Perpignan", "Strasbourg", "Brest", "Toulon", "Monaco"));
+    public ArrayList<Ville> villes = new ArrayList<Ville>();
+    public int nbVille;
+    public ArrayList<Feu> feux = new ArrayList<Feu>(); // a mettre dans route
 
-        for( int i =0;i<nbVille;i++){
+    void Jeu() { // remettre l'argument ici
+        this.nbVille = 6;
+    }
 
-            Ville ville = new Ville(nomVilles.get(i), (int)(Math.random()*11));  // x un entier aleatoire representant le nombre de voiture creees par tour
+    public void init() {
+
+        for (int i = 0; i < nbVille; i++) {
+
+            Ville ville = new Ville(nomVilles.get(i), (int) (Math.random() * 11));  // x un entier aleatoire representant le nombre de voiture creees par tour
             villes.add(ville);
         }
-        for (Ville i : villes){
-            for (int j=0;j<nbVille-1;j++){
+        for (Ville i : villes) {
+            for (int j = 0; j < nbVille - 1; j++) {
 
-                if (j<0.2*nbVille){
+                if (j < 0.2 * nbVille) {
                     // creer autoroute
-                }
-                else if ((j<0.3*nbVille)&&(j>0.2*nbVille)){
+                } else if ((j < 0.3 * nbVille) && (j > 0.2 * nbVille)) {
                     // crrer Nationale
-                }
-                else System.out.println("zegfzgzegzge");// creer route
+                } else System.out.println("zegfzgzegzge");// creer route
                 // du style i.voies.add("LaVoieCree");
             }
         }
@@ -28,51 +35,54 @@ public class Jeu {
 
 
     }
-    public void deplacementVehicules(){
-    	int compteur=0;
-    	for (Ville i : villes){
-    		for (int j=compteur;j<nbVille-1;j++){
-    			for ( Voie k : i.voies){
-    				for (Vehicule l : k.voitures){
-    					// test() ?
-    					l.accelerer(); // a faire
-					}
-				}
-			}
-    		compteur++;
-		}
-	}
-    public void DebutTour(){ // init de chaque tours
-        for ( Ville i : villes){
-            i.Generer_vehicule();
+
+    public void deplacementVehicules() {
+        int compteur = 0;
+        for (Ville i : villes) {
+            for (int j = compteur; j < nbVille - 1; j++) {
+                for (Voie k : i.voies) {
+                    for (Vehicule l : k.voitures) {
+                        // test() ?
+                        for ( Vehicule m : k.voitures){
+                            if ((m.destination==l.destination)&(l.position-m.position<3))
+                            {
+                                if ( (m.destination!= l.destination )&(l.position+m.position-k.distances>-3)&(l.position+m.position-k.distances<0)){}//decelerer
+                                    //if ()
+                            }
+                        }
+                        l.accelerer(); // a faire
+                    }
+                }
+            }
+            compteur++;
         }
-        for ( Feu i : feux){
+    }
+
+
+    public void DebutTour() { // init de chaque tours
+        for (Ville i : villes) {
+            i.Generer_vehicule(villes, i);
+        }
+        for (Feu i : feux) {
             i.tour();
         }
-
         deplacementVehicules();
     }
 
     //public Vector<String> nomVilles = new Vector<>();
-    List<String> nomVilles = new ArrayList<String>(Arrays.asList("Paris","Versailles","Lille","Marseilles","Lyon","Perpignan","Strasbourg","Brest","Toulon","Monaco"));
-
-
-    public ArrayList<Ville> villes = new ArrayList<Ville>();
-    public int nbVille;
-    public ArrayList<Feu> feux = new ArrayList<Feu>();
-
-    void Jeu() {
-        // demander le nombre de villes voulus
-        this.nbVille=0;// reponse apporte
-    }
-
 
 
 
 
     public static void main( String[] args){
-        //S'exec
+        /*Scanner sc = new Scanner(System.in);
+        System.out.println("Veuillez saisir le nombre de villes souhaité: (implémenté par defaut mais cest la ) ");
+        int i = sc.nextInt();*/
+        Jeu FlashMc = new Jeu ();
+        FlashMc.init();
+        System.out.println(FlashMc.villes);
+        System.out.println("test");
+        FlashMc.DebutTour();
+
     }
 }
-
-

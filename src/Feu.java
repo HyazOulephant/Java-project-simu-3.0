@@ -1,10 +1,12 @@
 public class Feu{
 	public int etat;
 	public int tours;
+	public int position;
 
-	public Feu(String etat){
+	public Feu(String etat,int position){
 		if(etat=="allume")this.etat=1;
 		else this.etat=0;
+		this.position=position;
 	}
 	public void tour(){
 		if (this.tours==3){
