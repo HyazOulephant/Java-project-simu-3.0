@@ -1,24 +1,32 @@
 import java.util.ArrayList;
 
+
 public class Ville {
 
     public String nom;
     public int nbVehicules;
     public ArrayList<Voie> voies = new ArrayList<Voie>();
 
+
     public Ville(String nom,int nbVehicule){
         this.nbVehicules=nbVehicule;
         this.nom=nom;
     }
 
-    void Generer_vehicule (){
+    void Generer_vehicule (ArrayList<Ville> villes,Ville j){
+
+
         for ( int i = 0;i<this.nbVehicules;i++){
+            System.out.println("for nbvehicules");
             Vehicule car = new Vehicule("destination");
-            // nombre aleatoire dans le tableau deds nom de villes avec exceptoion pour la ville qui la genere
+            int valeur=(int)(Math.random()*6);                          // a modifier en fct de nbville=6
+            while((car.destination=villes.get(valeur).nom)==j.nom){
+                valeur=(int)(Math.random()*6);
+            }
+
             switch(car.destination){
                 case "Versailles" :
                     this.voies.get(1).voitures.add(car);break; // cas pour chaque ville dans lordre du tableau de nom de ville
-                // voir implementation de voies[] en java
                 case "Paris" :
                     this.voies.get(0).voitures.add(car);break;
                 case "Lille" :

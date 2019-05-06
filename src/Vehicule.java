@@ -18,21 +18,28 @@ public class Vehicule{
 		this.destination=destination;
 	}
 
-	public void doubler(){
-		// tester avec toutes les voitures sur la route si yen a ala meme distance quelle ou 1 decart etc
 
+
+	public void accelerer(Voie voie){
+		if(this.vitesse<0){}// peu etre implementer une variable qui renvoie a la route pour savoir instanceof => on sait a cb max elle doit rouler
+			if (voie.intersection==0){
+				if (this.vitesse<(voie.vitesse+chaufard)) {
+					this.vitesse += 1; // a determiner!
+				}
 	}
+			else
+			{
+				if ((this.position-voie.intersections.get(0).position)>-3 &((this.position-voie.intersections.get(0).position)<0)){}
+				else {
+					if (this.vitesse<(voie.vitesse+chaufard)) {
+						this.vitesse += 1; // a determiner!
+					}
+				}
+			}
 
-	public void accelerer(){
-		if(this.vitesse<0)// peu etre implementer une variable qui renvoie a la route pour savoir instanceof => on sait a cb max elle doit rouler
-			vitesse+=10; // a determiner!
 
+}
+	public void decelerer(){
+		this.vitesse-=1;
 	}
-
-	public void stop(){
-		this.vitesse=0;
-	}
-
-
-
 }
