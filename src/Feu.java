@@ -1,7 +1,7 @@
-public class Feu{
+public class Feu extends Intersection{
 	public int etat;
 	public int tours;
-	public int position;
+
 
 	public Feu(String etat,int position){
 		if(etat=="allume")this.etat=1;

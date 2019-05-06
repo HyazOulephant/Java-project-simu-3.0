@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
+
 public class Ville {
 
     public String nom;
     public int nbVehicules;
     public ArrayList<Voie> voies = new ArrayList<Voie>();
+
 
     public Ville(String nom,int nbVehicule){
         this.nbVehicules=nbVehicule;
@@ -13,11 +15,13 @@ public class Ville {
 
     void Generer_vehicule (ArrayList<Ville> villes,Ville j){
 
+
         for ( int i = 0;i<this.nbVehicules;i++){
+            System.out.println("for nbvehicules");
             Vehicule car = new Vehicule("destination");
-            int valeur=(int)(Math.random()*11);
+            int valeur=(int)(Math.random()*6);                          // a modifier en fct de nbville=6
             while((car.destination=villes.get(valeur).nom)==j.nom){
-                valeur=(int)(Math.random()*11);
+                valeur=(int)(Math.random()*6);
             }
 
             switch(car.destination){
