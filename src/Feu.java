@@ -9,6 +9,7 @@ public class Feu extends Intersection{
 		this.position=position;
 	}
 	public void tour(){
+		//System.out.println("tour feu ");
 		if (this.tours==3){
 			this.etat=(this.etat+1)%2;
 			this.tours=0;

@@ -17,8 +17,9 @@ public class Ville {
 
 
         for ( int i = 0;i<this.nbVehicules;i++){
-            System.out.println("for nbvehicules");
+            //System.out.println("for nbvehicules");
             Vehicule car = new Vehicule("destination");
+            this.voies.get(1).voitures.add(car);  // TEST A NE PAS LAISSER
             int valeur=(int)(Math.random()*6);                          // a modifier en fct de nbville=6
             while((car.destination=villes.get(valeur).nom)==j.nom){
                 valeur=(int)(Math.random()*6);
