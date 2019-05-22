@@ -1,7 +1,7 @@
 package sample;
 import prog.Jeu;
 
-
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +22,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import prog.Vehicule;
+import prog.Ville;
+import prog.Voie;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -45,7 +49,7 @@ public class Main extends Application {
 
         //Partie gauche/bas
 
-        Image image = new Image(new FileInputStream("C:\\Users\\hyach\\Documents\\java\\JavaFX_tests\\src\\sample\\Ways.png"));
+        Image image = new Image(new FileInputStream("src/sample/Ways.png"));
         this.imageView = new ImageView(image);
         imageView.setFitWidth(600);
         imageView.setPreserveRatio(true);
@@ -104,7 +108,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(mainPane,900,500));
         primaryStage.setTitle("Simu 2.0");
         primaryStage.show();
-        Image image2 = new Image(new FileInputStream("C:\\Users\\hyach\\Documents\\java\\JavaFX_tests\\src\\sample\\sanic.png"));
+        Image image2 = new Image(new FileInputStream("src/sample/sanic.png"));
         this.imageView2 = new ImageView(image2);
         imageView2.setFitWidth(30);
         imageView2.setPreserveRatio(true);
@@ -113,24 +117,52 @@ public class Main extends Application {
             Jeu FlashMc = new Jeu ();
             FlashMc.nbVille=6;
             FlashMc.init();
-            refresh();
+            refresh(FlashMc);
 
     }
 
-    public void refresh() throws FileNotFoundException {
+    public void refresh(Jeu game) throws FileNotFoundException {
+        for (int a=0;a<10;a++){
         Animated.getChildren().remove(imageView2);
         //clear
         //code
         //show
+        game.DebutTour();
+
+        int compteur = 0;
+        for (Ville i : game.villes) {
+
+            for (int j = compteur; j < game.nbVille; j++) {
+                Voie k = i.voies.get(j);
+
+                for (Vehicule l : k.voitures) {
+                    Ville destination=game.villes.get(0);
+                    switch(l.destination){
+                    case "Paris":destination=game.villes.get(0);break;
+                    case "Versailles":destination=game.villes.get(1);break;
+                    case "Lille":destination=game.villes.get(2);break;
+                    case "Marseilles":destination=game.villes.get(3);break;
+                    case "Lyon":destination=game.villes.get(4);break;
+                    case "Perpignan": destination=game.villes.get(5);break;
+                    default : System.out.println("destination dune voiture eroné");break;}
+
+                    Image image2 = new Image(new FileInputStream("src/sample/sanic.png"));
+                    this.imageView2 = new ImageView(image2);
+                    float position=l.position/k.distances;
+                    imageView2.setX(i.posX+position*destination.posX);
+                    imageView2.setY(i.posY+position*destination.posY);
+                    imageView2.setFitWidth(30);
+                    imageView2.setPreserveRatio(true);
+                    Animated.getChildren().add(imageView2);
+                }
+            }
 
 
-        imageView2.setX(200);
-        imageView2.setY(300);
-        Animated.getChildren().add(imageView2);
 
 
-
-
+    }
+            try{ TimeUnit.SECONDS.sleep(5);}
+            catch(InterruptedException ex){ System.out.println("error delay refresh");} }
     }
 
     public void changeToSmallLayout() {

@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class Jeu {
 
     public List<String> nomVilles = new ArrayList<String>(Arrays.asList("Paris", "Versailles", "Lille", "Marseilles", "Lyon", "Perpignan", "Strasbourg", "Brest", "Toulon", "Monaco"));
+    public List<Integer> positionX = new ArrayList<Integer>(Arrays.asList(25,235,465,25,235,465));
+    public List<Integer> positionY = new ArrayList<Integer>(Arrays.asList(100,100,100,25,235,465));
     public ArrayList<Ville> villes = new ArrayList<Ville>();
     public int nbVille;
     public ArrayList<Feu> feux = new ArrayList<Feu>(); // a mettre dans route
@@ -20,7 +22,7 @@ public class Jeu {
         Random rand = new Random();
         for (int i = 0; i < nbVille; i++) {
             // System.out.println("1 ville cree");
-            Ville ville = new Ville(nomVilles.get(i), 1);  // x un entier aleatoire representant le nombre de voiture creees par tour
+            Ville ville = new Ville(nomVilles.get(i), 1,positionX.get(i),positionY.get(i));  // x un entier aleatoire representant le nombre de voiture creees par tour
             villes.add(ville);
         }
 
