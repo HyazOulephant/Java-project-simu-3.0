@@ -62,10 +62,10 @@ public class Jeu {
 
         if(nbVille==6){
 
-            Feu newfeu = new Feu("allume",((villes.get(0).voies.get(2).distances)/2));
+            /*Feu newfeu = new Feu("allume",((villes.get(0).voies.get(2).distances)/2));
             villes.get(0).voies.get(2).intersections.add((Intersection)newfeu);
             //villes.get(4).voies.get(0).intersection +=1;
-            villes.get(0).voies.get(2).intersection +=1;   // TEST A NE SURTOUT PAS LAISSER
+            villes.get(0).voies.get(2).intersection +=1;   // TEST A NE SURTOUT PAS LAISSER*/
 
 
 
@@ -75,7 +75,7 @@ public class Jeu {
 
             if (villes.get(0).voies.get(4).nb_voies == villes.get(1).voies.get(3).nb_voies){
                 // on met un feu
-                System.out.println("0 4 ==");
+
                 Feu newfeu1 = new Feu("allume",((villes.get(0).voies.get(4).distances)/2));
                 villes.get(0).voies.get(4).intersections.add((Intersection)newfeu1);
                 //villes.get(4).voies.get(0).intersection +=1;
@@ -233,44 +233,70 @@ public class Jeu {
             for (int j = compteur; j < nbVille ; j++) {
                 //System.out.println("for compteur"+(j));
                 Voie k =i.voies.get(j) ;
-                   // System.out.println(("for voies :"+k.destination));
+                  // System.out.println(("for voies :"+k.destination)); // tous ca ok
 
                     for (Vehicule l : k.voitures) {
+                        //System.out.println("acceleration");
+                        //l.accelerer(k);
+
                         //System.out.println(("test0"));
                         // test 1 collision vehicules a doubler ?
                         // test 2 collision en doublant ( celon le type de la voie si ya moins de x vehicules a +/- 3 a la meme position)
                         // test 3
                         int compteur2=0;
-
+                        int compteur3=0;
+                        if (l.position < 16) {
+                            l.accelerer(k);
+                        }
+                        else{
                         for ( Vehicule m : k.voitures) {
-                            //System.out.println("test1");
-                            //System.out.println("intersection : "+k.intersection + "voiture :"+ m.destination);
-                            if ((m.destination == l.destination) & (l.position - m.position < 3) & (l.position - m.position < 0)) // doubler
-                            {
-                                if (l.vitesse > m.vitesse) {
-                                    compteur2++;
-                                }}
-                                if ((m.destination != l.destination) & (l.position + m.position - k.distances > -4) & (l.position + m.position - k.distances < 0)) {
+
+
+
+
+                                //System.out.println("test1");
+                                //System.out.println("intersection : "+k.intersection + "voiture :"+ m.destination);
+                                if ((m.destination == l.destination) & (l.position < m.position) & (l.position - m.position < 16) & (l.position - m.position > 0)) // doubler
+                                {
                                     if (l.vitesse > m.vitesse) {
                                         compteur2++;
                                     }
                                 }
-
-                        }
-                                if (compteur2<=k.nb_voies){
-                                     l.accelerer(k);
-                                     break;
-                                 }
-                                else{
-                                    l.decelerer();
+                                //System.out.println("compteur 2:"+compteur2 + "  compteur3 : "+compteur3);
+                                //  System.out.println("l.position :"+l.position + " k.distances : "+k.distances);
+                                float res1 = l.position / k.distances;
+                                float res2 = m.position / k.distances;
+                                //System.out.println("res 1 :"+res1 + "  res2 : "+res2);
+                                if ((m.destination != l.destination) & (res1 + res2 > 0.90)) { // ancien : (l.position + m.position - k.distances > -8) & (l.position + m.position - k.distances < 0)
+                                    if (l.vitesse > m.vitesse) {
+                                        compteur3++;
+                                    }
                                 }
 
-                    }
+
+                        }
+                            if (((compteur2 + compteur3) <= k.nb_voies)) {
+                                l.accelerer(k);
+                                break;
+                            } else {
+                                if (compteur2 != 0) {
+                                    l.accelerer(k);
+                                    break;
+                                } else {
+                                    l.decelerer();
+                                    //System.out.println("freinage " + compteur2 + " voiture devant");
+                                }
+                            }}
+                        } // ici for each voiture
+                    }  compteur++;
+
                 }
-            compteur++;
+
+
             }
 
-        }
+
+
 
 
      public void tourFeu(){
@@ -351,27 +377,39 @@ public class Jeu {
         System.out.println(FlashMc.villes.get(4).voies.get(5).intersection); // 1*/
 
 
-
-        for ( int i = 0 ; i<5; i++)
-        {
-            System.out.println("tour :"+i);
+       // System.out.println("intersection :"+FlashMc.villes.get(0).voies.get(4).intersection);
+       // System.out.println("nb voie :"+FlashMc.villes.get(0).voies.get(4).nb_voies);
+        //System.out.println("chaufard :"+FlashMc.villes.get(0).voies.get(1).voitures.get(0).chaufard);
+        for ( int i = 0 ; i<10; i++) {
+            //System.out.println("~~~~~~~~~~~~~~~~tour :" + i);
             FlashMc.DebutTour();
-            /*for ( Vehicule j : FlashMc.villes.get(1).voies.get(2).voitures){
-                System.out.println("possition : "+j.vitesse);
-                if(FlashMc.villes.get(0).voies.get(4).intersections.get(0)instanceof Feu){//*/
-            System.out.println("vitesse : "+FlashMc.villes.get(0).voies.get(1).voitures.get(0).vitesse);
-                    System.out.println("position : "+FlashMc.villes.get(0).voies.get(1).voitures.get(0).position);
-               // }
 
-           // }
+            //System.out.println("vitesse : " + FlashMc.villes.get(0).voies.get(4).voitures.get(0).vitesse);
+            //System.out.println("position : " + FlashMc.villes.get(0).voies.get(4).voitures.get(0).position);
+            //if (i < 1) System.out.println("chaufard :" + FlashMc.villes.get(0).voies.get(4).voitures.get(0).chaufard);
 
-           // System.out.println(FlashMc.villes.get(1).voies.get(1).voitures.get(0).position);
+           /* int s = 0;
+            for (Vehicule j : FlashMc.villes.get(0).voies.get(1).voitures) { // test nbr de voiture sur la route
+
+                s++;
+            }
+            System.out.println("nb voiture : " + s);*/
+            //for (Vehicule j : FlashMc.villes.get(1).voies.get(2).voitures) {
+               // System.out.println("possition : " + j.vitesse);
+                //if (FlashMc.villes.get(0).voies.get(4).intersections.get(0) instanceof Feu) {//
+
+                    // }
+
+                    // }
+
+                    // System.out.println(FlashMc.villes.get(1).voies.get(1).voitures.get(0).position);
+                //}
+
+
+            }
         }
-
-
-
     }
-}
+
 
 
 
