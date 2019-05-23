@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_java-simu" default="compile.module.java-simu">
+  <dirname property="module.java-simu.basedir" file="${ant.file.module_java-simu}"/>
+  
+  <property name="module.jdk.home.java-simu" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.java-simu" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.java-simu" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.java-simu" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="java-simu.output.dir" value="${module.java-simu.basedir}/out/production/java-simu"/>
+  <property name="java-simu.testoutput.dir" value="${module.java-simu.basedir}/out/test/java-simu"/>
+  
+  <path id="java-simu.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="java-simu.module.production.classpath">
+    <path refid="${module.jdk.classpath.java-simu}"/>
+    <path refid="library.javafx-swt.classpath"/>
+  </path>
+  
+  <path id="java-simu.runtime.production.module.classpath">
+    <pathelement location="${java-simu.output.dir}"/>
+    <path refid="library.javafx-swt.classpath"/>
+  </path>
+  
+  <path id="java-simu.module.classpath">
+    <path refid="${module.jdk.classpath.java-simu}"/>
+    <pathelement location="${java-simu.output.dir}"/>
+    <path refid="library.javafx-swt.classpath"/>
+  </path>
+  
+  <path id="java-simu.runtime.module.classpath">
+    <pathelement location="${java-simu.testoutput.dir}"/>
+    <pathelement location="${java-simu.output.dir}"/>
+    <path refid="library.javafx-swt.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.java-simu">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.java-simu">
+    <patternset refid="excluded.from.module.java-simu"/>
+  </patternset>
+  
+  <path id="java-simu.module.sourcepath">
+    <dirset dir="${module.java-simu.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.java-simu" depends="compile.module.java-simu.production,compile.module.java-simu.tests" description="Compile module java-simu"/>
+  
+  <target name="compile.module.java-simu.production" depends="register.custom.compilers" description="Compile module java-simu; production classes">
+    <mkdir dir="${java-simu.output.dir}"/>
+    <javac2 destdir="${java-simu.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.java-simu}/javac">
+      <compilerarg line="${compiler.args.java-simu}"/>
+      <bootclasspath refid="java-simu.module.bootclasspath"/>
+      <classpath refid="java-simu.module.production.classpath"/>
+      <src refid="java-simu.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.java-simu"/>
+    </javac2>
+    
+    <copy todir="${java-simu.output.dir}">
+      <fileset dir="${module.java-simu.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.java-simu.tests" depends="register.custom.compilers,compile.module.java-simu.production" description="compile module java-simu; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.java-simu" description="cleanup module">
+    <delete dir="${java-simu.output.dir}"/>
+    <delete dir="${java-simu.testoutput.dir}"/>
+  </target>
+</project>
