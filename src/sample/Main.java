@@ -1,43 +1,20 @@
 package sample;
 import javafx.animation.AnimationTimer;
-import javafx.animation.Transition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
-import javafx.scene.shape.Circle;
-import javafx.util.Duration;
-import prog.Jeu;
+import prog.*;
 
-import java.util.ArrayDeque;
-
-import javafx.animation.AnimationTimer;
-import javafx.animation.Transition;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import  java.lang.Thread;
-import java.lang.Runnable;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.geometry.Insets;
-import prog.Vehicule;
-import prog.Ville;
-import prog.Voie;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class Main extends Application {
 
@@ -73,7 +50,6 @@ public class Main extends Application {
         textField4.setDisable(true);
 
         this.button2 = new Button("Submit ");
-
         this.text3 = new Label("Autre");
         this.textField3 = new TextField();
         textField3.setPrefWidth(80);
@@ -182,63 +158,47 @@ public class Main extends Application {
 
 
                 FlashMc.DebutTour(Sanics);
-
-               /* Sanics.getChildren().clear();
-                Circle circle = new Circle();
-                circle.setCenterX(i);
-                circle.setCenterY(i);
-                circle.setRadius(5);
-                Sanics.getChildren().add(circle);*/
                 textField4.setText(String.valueOf(FlashMc.moyenne));
             }
 
 
         }.start();
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                try {
-                    Integer.parseInt(textField.getText());
-                    System.out.println(Integer.parseInt(textField.getText()));
-                    for (Ville i : FlashMc.villes) {
-                        i.nbVehicules = (Integer.parseInt(textField.getText()) / FlashMc.nbVille) / 60;
-                    }
-
-                } catch (Exception u) {
-                    System.out.println("Entiers seulement!");
+        button.setOnAction(e -> {
+            try {
+                Integer.parseInt(textField.getText());
+                System.out.println(Integer.parseInt(textField.getText()));
+                for (Ville i : FlashMc.villes) {
+                    i.nbVehicules = (Integer.parseInt(textField.getText()) / FlashMc.nbVille) / 60;
                 }
-                //System.out.println(textField.getText());
+
+            } catch (Exception u) {
+                System.out.println("Entiers seulement!");
             }
+            //System.out.println(textField.getText());
         });
-        button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                try {
-                    Integer.parseInt(textField2.getText());
-                    System.out.println(Integer.parseInt(textField2.getText()));
-                    FlashMc.coef = Integer.parseInt(textField2.getText());
+        button2.setOnAction(e -> {
+            try {
+                Integer.parseInt(textField2.getText());
+                System.out.println(Integer.parseInt(textField2.getText()));
+                FlashMc.coef = Integer.parseInt(textField2.getText());
 
-                } catch (Exception u) {
-                    System.out.println("Entiers seulement!");
-                }
-                //System.out.println(textField.getText());
+            } catch (Exception u) {
+                System.out.println("Entiers seulement!");
             }
+            //System.out.println(textField.getText());
         });
 
         //Pas utilisee
-        /*button3.setOnAction(new EventHandler<ActionEvent>() {
+        /*button3.setOnAction(e -> {
             @Override
             public void handle(ActionEvent e) {
                 try {
                     Integer.parseInt(textField3.getText());
                     System.out.println(Integer.parseInt(textField.getText()));
-                    for (Ville i : FlashMc.villes) {
-                        i.nbVehicules = (Integer.parseInt(textField.getText()) / FlashMc.nbVille) / 60;
-                    }
 
                 } catch (Exception u) {
-                    System.out.println("Entiers seulement!");
+                    System.out.println("qqchose ici!");
                 }
                 //System.out.println(textField.getText());
             }
@@ -251,7 +211,7 @@ public class Main extends Application {
 
 
 
-    public void changeToSmallLayout() {
+    private void changeToSmallLayout() {
         hBox.getChildren().clear();
         vBox.getChildren().clear();
         vBox.getChildren().addAll(Animated, vBox2);
@@ -259,7 +219,7 @@ public class Main extends Application {
         Pane.getChildren().add(vBox);
     }
 
-    public void changeToLargeLayout() {
+    private void changeToLargeLayout() {
         hBox.getChildren().clear();
         vBox.getChildren().clear();
         hBox.getChildren().addAll(Animated, vBox2);
