@@ -181,14 +181,14 @@ public class Main extends Application {
                 System.out.println("testdedef");
 
 
-                // FlashMc.DebutTour(Sanics);
+                FlashMc.DebutTour(Sanics);
 
-                Sanics.getChildren().clear();
+               /* Sanics.getChildren().clear();
                 Circle circle = new Circle();
                 circle.setCenterX(i);
                 circle.setCenterY(i);
                 circle.setRadius(5);
-                Sanics.getChildren().add(circle);
+                Sanics.getChildren().add(circle);*/
                 textField4.setText(String.valueOf(FlashMc.moyenne));
             }
 

@@ -20,8 +20,8 @@ public class Jeu {
 
     public List<String> nomVilles = new ArrayList<String>(Arrays.asList("Paris", "Versailles", "Lille", "Marseilles", "Lyon", "Perpignan", "Strasbourg", "Brest", "Toulon", "Monaco"));
     public ArrayList<Ville> villes = new ArrayList<Ville>();
-    public List<Integer> positionX = new ArrayList<>(Arrays.asList(25, 235, 465, 25, 235, 465));
-    public List<Integer> positionY = new ArrayList<>(Arrays.asList(100, 100, 100, 25, 235, 465));
+    public List<Integer> positionX = new ArrayList<>(Arrays.asList(35, 250, 465, 35, 250, 480));
+    public List<Integer> positionY = new ArrayList<>(Arrays.asList(120, 120, 120, 310, 310, 310));
     public int nbVille;
     public ArrayList<Feu> feux = new ArrayList<Feu>(); // a mettre dans route
     public float moyenne=0;
@@ -39,7 +39,7 @@ public class Jeu {
         System.out.println("Initialisation...");
         for (int i = 0; i < nbVille; i++) {
             // System.out.println("1 ville cree");
-            Ville ville = new Ville(nomVilles.get(i), 0, positionX.get(i), positionY.get(i));  // x un entier aleatoire representant le nombre de voiture creees par tour
+            Ville ville = new Ville(nomVilles.get(i), 2, positionX.get(i), positionY.get(i));  // x un entier aleatoire representant le nombre de voiture creees par tour
             villes.add(ville);
         }
 
@@ -77,8 +77,8 @@ public class Jeu {
             compteur++;
         }
 
-        Vehicule car = new Vehicule("Versailles");
-        this.villes.get(0).voies.get(1).voitures.add(car);
+        //Vehicule car = new Vehicule("Versailles");
+        //this.villes.get(0).voies.get(1).voitures.add(car);
 
         if (nbVille == 6) {
 
@@ -255,18 +255,18 @@ public class Jeu {
         //System.out.println(("la"));
         imageView2 = new ImageView(image2);
         float position=l.position/k.distances;//System.out.println("% sur la route "+ position);
-        Circle circle = new Circle();
+        //Circle circle = new Circle();
         if (position==0){
-            imageView2.setX((i.posX+destination.posX)/(1/position));
-            imageView2.setY((i.posY+destination.posY)/(1/position));
-            imageView2.setFitWidth(30);
+            imageView2.setX(i.posX+(position*(destination.posX-i.posX)));
+            imageView2.setY(i.posY+(position*(destination.posY-i.posY)));
+            imageView2.setFitWidth(5);
             imageView2.setPreserveRatio(true);
 
         }
         else {
-            imageView2.setX((i.posX+destination.posX)/(1/position));
-            imageView2.setY((i.posY+destination.posY)/(1/position));
-            imageView2.setFitWidth(30);
+            imageView2.setX(i.posX+(position*(destination.posX-i.posX)));
+            imageView2.setY(i.posY+(position*(destination.posY-i.posY)));
+            imageView2.setFitWidth(8);
             imageView2.setPreserveRatio(true);
 
         }
