@@ -7,19 +7,16 @@ public class Ville {
 
     public String nom;
     public int nbVehicules;
-    public int posX;
-    public int posY;
     public ArrayList<Voie> voies = new ArrayList<Voie>();
+public int posX;
+public int posY;
 
-
-    public Ville(String nom,int nbVehicule,int posX,int posY){
+    public Ville(String nom,int nbVehicule){
         this.nbVehicules=nbVehicule;
         this.nom=nom;
-        this.posX=posX;
-        this.posY=posY;
     }
 
-    public void Generer_vehicule(ArrayList<Ville> villes, Ville j){
+    public void Generer_vehicule (ArrayList<Ville> villes,Ville j){
 
 
         for ( int i = 0;i<this.nbVehicules;i++){
