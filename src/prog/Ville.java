@@ -11,9 +11,11 @@ public class Ville {
 public int posX;
 public int posY;
 
-    public Ville(String nom,int nbVehicule){
+    public Ville(String nom,int nbVehicule,int x , int y){
         this.nbVehicules=nbVehicule;
         this.nom=nom;
+        this.posX=x;
+        this.posY=y;
     }
 
     public void Generer_vehicule (ArrayList<Ville> villes,Ville j){

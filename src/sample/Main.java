@@ -1,9 +1,19 @@
 package sample;
 import javafx.animation.AnimationTimer;
+import javafx.animation.Transition;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import prog.Jeu;
 
+import java.util.ArrayDeque;
 
-
+import javafx.animation.AnimationTimer;
+import javafx.animation.Transition;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import  java.lang.Thread;
+import java.lang.Runnable;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +49,9 @@ public class Main extends Application {
     private HBox hBox;
     private StackPane Pane;
     private Group Animated;
-    MenuBar menuBar;
+    private Group Sanics;
+    private Group Background;
+    private MenuBar menuBar;
 
 
 
@@ -67,7 +79,10 @@ public class Main extends Application {
 
         //Partie animee (jeu)
         Animated = new Group();
-        Animated.getChildren().add(imageView);
+        Background =new Group();
+        Background.getChildren().add(imageView);
+        Sanics = new Group();
+        Animated.getChildren().addAll(Background,Sanics);
 
 
         Pane = new StackPane();
@@ -116,105 +131,35 @@ public class Main extends Application {
         imageView2.setFitWidth(30);
         imageView2.setPreserveRatio(true);
 
-
-
-
-
         System.out.println("JEU EXECUTE");
 
-        Jeu FlashMc = new Jeu ();
+       /* Jeu FlashMc = new Jeu ();
         FlashMc.nbVille=6;
-        FlashMc.init();
-        AnimationTimer h = new AnimationTimer() {
+        FlashMc.init();*/
 
-            private long lastUpdate ;
+        new AnimationTimer()//gestion de l'animation
+        {
+            int i=0;
+            public void handle(long currentNanoTime)
+            {i++;
 
-            private double speed = 50 ; // pixels per second
+                System.out.println("test");
+                System.out.println("testdedef");
 
-            @Override
-            public void start() {
-                lastUpdate = System.nanoTime();
-                super.start();
-                System.out.println("start");
-            }
+               // FlashMc.DebutTour(Sanics);
 
-            @Override
-            public void handle(long now) {
-                long elapsedNanoSeconds = now - lastUpdate ;
-                double elapsedSeconds = elapsedNanoSeconds / 1_000_000_000.0 ;
-                System.out.println("refresh");
-                FinTour(FlashMc);
-
-                lastUpdate = now ;
-
-            }
-        };h.start();
-
-    }
-    public void FinTour(Jeu T){
-
-        Animated.getChildren().remove(imageView2);
-        //clear
-        //code
-        //show
-        T.DebutTour();
-
-        int compteur = 0;
-        for (Ville i : T.villes) {
-
-            for (int j = compteur; j < T.nbVille; j++) {
-                Voie k = i.voies.get(j);
-
-                for (Vehicule l : k.voitures) {
-                    Ville destination=T.villes.get(0);
-                    System.out.println("pour chaque voiture ");
-                    switch(l.destination){
-                        case "Paris":destination=T.villes.get(0);break;
-                        case "Versailles":destination=T.villes.get(1);break;
-                        case "Lille":destination=T.villes.get(2);break;
-                        case "Marseilles":destination=T.villes.get(3);break;
-                        case "Lyon":destination=T.villes.get(4);break;
-                        case "Perpignan": destination=T.villes.get(5);break;
-                        default : System.out.println("destination dune voiture eroné");break;}
-
-                    Image image2 = null;
-                    try {
-                        image2 = new Image(new FileInputStream("src/prog/sanic.png"));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    imageView2 = new ImageView(image2);
-                    float position=l.position/k.distances;
-                    imageView2.setX(i.posX+position*destination.posX);
-                    imageView2.setY(i.posY+position*destination.posY);
-                    imageView2.setFitWidth(30);
-                    imageView2.setPreserveRatio(true);
-                    Animated.getChildren().add(imageView2);
-                }
+                Sanics.getChildren().clear();
+                Circle circle = new Circle();
+                circle.setCenterX(i);
+                circle.setCenterY(i);
+                circle.setRadius(5);
+                Sanics.getChildren().add(circle);
             }
 
 
-
-
-        }
-
+            }.start();
     }
 
-    public void refresh() throws FileNotFoundException {
-        Animated.getChildren().remove(imageView2);
-        //clear
-        //code
-        //show
-
-
-        imageView2.setX(200);
-        imageView2.setY(300);
-        Animated.getChildren().add(imageView2);
-
-
-
-
-    }
 
     public void changeToSmallLayout() {
         hBox.getChildren().clear();
@@ -231,13 +176,4 @@ public class Main extends Application {
         Pane.getChildren().clear();
         Pane.getChildren().add(hBox);
     }
-        //FXMLLoader.load(getClass().getResource("sample.fxml"));
-
-
-    /*public static void main(String[] args) {
-        Jeu FlashMc = new Jeu ();
-        FlashMc.nbVille=6;
-        FlashMc.init();
-        Application.launch(Main.class,args);
-    }*/
 }
