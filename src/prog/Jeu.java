@@ -24,6 +24,8 @@ public class Jeu {
     public List<Integer> positionY = new ArrayList<>(Arrays.asList(100, 100, 100, 25, 235, 465));
     public int nbVille;
     public ArrayList<Feu> feux = new ArrayList<Feu>(); // a mettre dans route
+    public float moyenne=0;
+    public float coef=1;
 
 
     public void init() {
@@ -283,14 +285,19 @@ public class Jeu {
     public void deplacementVehicules(Group Sanics) {  // a bosser !!!!   probleme voiture 3/4 tour par tour
         Sanics.getChildren().clear();
         int compteur = 0;
+        moyenne=0;
+        int compteurDeVoiture=0;
         for (Ville i : villes) {
             //System.out.println(("for ville :"+i.nom));
             //System.out.println((i.nom));
             for (int j = compteur; j < nbVille ; j++) {
                 //System.out.println("for compteur"+(j));
                 Voie k =i.voies.get(j) ;
+                k.vitesse=(int)(k.vitesse*coef);
                   // System.out.println(("for voies :"+k.destination)); // tous ca ok
                     for (Vehicule l : k.voitures) {
+                        compteurDeVoiture++;
+                        moyenne+=l.vitesse;
                         if ( l.position>=k.distances){k.voitures.remove(l);}//System.out.println("voiture suprime");}
                         else{
                         //System.out.println("acceleration");
@@ -353,7 +360,7 @@ public class Jeu {
                 }
 
 
-            }
+            }moyenne=moyenne/compteurDeVoiture;
     //System.out.println(villes.get(0).voies.get(1).voitures.get(0).vitesse);
             }
 

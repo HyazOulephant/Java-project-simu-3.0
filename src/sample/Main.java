@@ -57,7 +57,7 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         menuBar = new MenuBar();
         //Partie droite/haut
         this.text = new Label("Sanics/min");
@@ -92,15 +92,15 @@ public class Main extends Application {
 
         hBox2 = new HBox();
         hBox2.setSpacing(8);
-        hBox2.getChildren().addAll(text,textField,button);
+        hBox2.getChildren().addAll(text, textField, button);
 
         hBox3 = new HBox();
         hBox3.setSpacing(8);
-        hBox3.getChildren().addAll(text2,textField2,textField4,button2);
+        hBox3.getChildren().addAll(text2, textField2, textField4, button2);
 
         hBox4 = new HBox();
         hBox4.setSpacing(8);
-        hBox4.getChildren().addAll(text3,textField3,button3);
+        hBox4.getChildren().addAll(text3, textField3, button3);
 
 
         //Vertical display
@@ -108,14 +108,14 @@ public class Main extends Application {
         vBox.setSpacing(8);
         vBox2 = new VBox();
         vBox2.setSpacing(8);
-        vBox2.getChildren().addAll(hBox2,hBox3,hBox4);
+        vBox2.getChildren().addAll(hBox2, hBox3, hBox4);
 
         //Partie animee (jeu)
         Animated = new Group();
-        Background =new Group();
+        Background = new Group();
         Background.getChildren().add(imageView);
         Sanics = new Group();
-        Animated.getChildren().addAll(Background,Sanics);
+        Animated.getChildren().addAll(Background, Sanics);
 
 
         Pane = new StackPane();
@@ -129,34 +129,33 @@ public class Main extends Application {
         menuBar.getMenus().add(creer);
         MenuItem ville = new MenuItem("Ville");
         Menu chemin = new Menu("Chemin");
-            MenuItem subMenuChemin = new MenuItem("Route");
-            MenuItem subMenuChemin2 = new MenuItem("Nationale");
-            MenuItem subMenuChemin3 = new MenuItem("Autoroute");
+        MenuItem subMenuChemin = new MenuItem("Route");
+        MenuItem subMenuChemin2 = new MenuItem("Nationale");
+        MenuItem subMenuChemin3 = new MenuItem("Autoroute");
         Menu intersection = new Menu("Intersection");
-            MenuItem subMenuIntersection = new MenuItem("Stop");
-            MenuItem subMenuIntersection2 = new MenuItem("Feu");
+        MenuItem subMenuIntersection = new MenuItem("Stop");
+        MenuItem subMenuIntersection2 = new MenuItem("Feu");
 
         creer.getItems().add(ville);
         creer.getItems().add(chemin);
-            chemin.getItems().addAll(subMenuChemin,subMenuChemin2,subMenuChemin3);
+        chemin.getItems().addAll(subMenuChemin, subMenuChemin2, subMenuChemin3);
         creer.getItems().add(intersection);
-            intersection.getItems().addAll(subMenuIntersection,subMenuIntersection2);
+        intersection.getItems().addAll(subMenuIntersection, subMenuIntersection2);
 
-        mainPane.getChildren().addAll(menuBar,Pane);
-
+        mainPane.getChildren().addAll(menuBar, Pane);
 
 
         changeToLargeLayout();
 
         primaryStage.widthProperty().addListener(e -> {
-            if(primaryStage.getWidth() < 650) {
+            if (primaryStage.getWidth() < 650) {
                 changeToSmallLayout();
             } else {
                 changeToLargeLayout();
             }
         });
 
-        primaryStage.setScene(new Scene(mainPane,900,500));
+        primaryStage.setScene(new Scene(mainPane, 900, 500));
         primaryStage.setTitle("Simu 2.0");
         primaryStage.show();
         Image image2 = new Image(new FileInputStream("src/sample/sanic.png"));
@@ -166,20 +165,21 @@ public class Main extends Application {
 
         System.out.println("JEU EXECUTE");
 
-       Jeu FlashMc = new Jeu ();
-        FlashMc.nbVille=6;
+        Jeu FlashMc = new Jeu();
+        FlashMc.nbVille = 6;
         FlashMc.init();
 
         new AnimationTimer()//gestion de l'animation
         {
-            int i=0;
-            public void handle(long currentNanoTime)
-            {i++;
+            int i = 0;
+
+            public void handle(long currentNanoTime) {
+                i++;
 
                 System.out.println("test");
                 System.out.println("testdedef");
 
-               // FlashMc.DebutTour(Sanics);
+                // FlashMc.DebutTour(Sanics);
 
                 Sanics.getChildren().clear();
                 Circle circle = new Circle();
@@ -190,32 +190,35 @@ public class Main extends Application {
             }
 
 
-            }.start();
+        }.start();
 
         button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
+            @Override
+            public void handle(ActionEvent e) {
                 try {
                     Integer.parseInt(textField.getText());
                     System.out.println(Integer.parseInt(textField.getText()));
-                    for (Ville i:FlashMc.villes) {
-                        i.nbVehicules = (Integer.parseInt(textField.getText())/FlashMc.nbVille)/60;
+                    for (Ville i : FlashMc.villes) {
+                        i.nbVehicules = (Integer.parseInt(textField.getText()) / FlashMc.nbVille) / 60;
                     }
 
-                } catch(Exception u) {
+                } catch (Exception u) {
                     System.out.println("Entiers seulement!");
                 }
                 //System.out.println(textField.getText());
             }
         });
         button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
+            @Override
+            public void handle(ActionEvent e) {
                 try {
                     Integer.parseInt(textField2.getText());
                     System.out.println(Integer.parseInt(textField2.getText()));
-                    //MOYENNE ICI
+                    //utilise ca et tas ta moyenne frer
+                    // -> FlashMc.moyenne;
+                    // met la nouvelle moyenne saisie par lutilisateur dans FlashMc.coef
 
-
-                } catch(Exception u) {
+                } catch (Exception u) {
                     System.out.println("Entiers seulement!");
                 }
                 //System.out.println(textField.getText());
@@ -224,28 +227,25 @@ public class Main extends Application {
 
         //Pas utilisee
         button3.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
+            @Override
+            public void handle(ActionEvent e) {
                 try {
                     Integer.parseInt(textField3.getText());
                     System.out.println(Integer.parseInt(textField.getText()));
-                    for (Ville i:FlashMc.villes) {
-                        i.nbVehicules = (Integer.parseInt(textField.getText())/FlashMc.nbVille)/60;
+                    for (Ville i : FlashMc.villes) {
+                        i.nbVehicules = (Integer.parseInt(textField.getText()) / FlashMc.nbVille) / 60;
                     }
 
-                } catch(Exception u) {
+                } catch (Exception u) {
                     System.out.println("Entiers seulement!");
                 }
                 //System.out.println(textField.getText());
             }
         });
-        public void moy(){
-            int moyenne = 0;
-            for (Ville i:FlashMc.villes) {
-
-            }
-            textField4.setText((String)moyenne); //A changer sinin appelé 1 seule fois
-        }
     }
+
+
+
 
 
 
