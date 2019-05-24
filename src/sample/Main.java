@@ -1,6 +1,9 @@
 package sample;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Transition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import prog.Jeu;
@@ -22,7 +25,6 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
@@ -30,9 +32,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.geometry.Insets;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import prog.Vehicule;
 import prog.Ville;
 import prog.Voie;
@@ -42,11 +41,13 @@ import java.io.FileNotFoundException;
 
 public class Main extends Application {
 
-    private Label textLabel;
+    private Button button,button2,button3;
+    private Label text,text2,text3;
+    private TextField textField,textField2,textField3, textField4;
     private ImageView imageView,imageView2;
-    private VBox vBox;
+    private VBox vBox,vBox2;
     private VBox mainPane;
-    private HBox hBox;
+    private HBox hBox,hBox2,hBox3,hBox4;
     private StackPane Pane;
     private Group Animated;
     private Group Sanics;
@@ -59,8 +60,24 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         menuBar = new MenuBar();
         //Partie droite/haut
-        this.textLabel = new Label("Lorem ipsum dolor sit amet aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        textLabel.setWrapText(true);
+        this.text = new Label("Sanics/min");
+        this.textField = new TextField();
+        textField.setPrefWidth(80);
+        this.button = new Button("Submit ");
+
+        this.text2 = new Label("Vit moy");
+        this.textField2 = new TextField();
+        textField2.setPrefWidth(80);
+        this.textField4 = new TextField();
+        textField4.setPrefWidth(40);
+        textField4.setDisable(true);
+
+        this.button2 = new Button("Submit ");
+
+        this.text3 = new Label("Autre");
+        this.textField3 = new TextField();
+        textField3.setPrefWidth(80);
+        this.button3 = new Button("Submit ");
 
         //Partie gauche/bas
 
@@ -73,9 +90,25 @@ public class Main extends Application {
         hBox = new HBox();
         hBox.setSpacing(8);
 
+        hBox2 = new HBox();
+        hBox2.setSpacing(8);
+        hBox2.getChildren().addAll(text,textField,button);
+
+        hBox3 = new HBox();
+        hBox3.setSpacing(8);
+        hBox3.getChildren().addAll(text2,textField2,textField4,button2);
+
+        hBox4 = new HBox();
+        hBox4.setSpacing(8);
+        hBox4.getChildren().addAll(text3,textField3,button3);
+
+
         //Vertical display
         vBox = new VBox();
         vBox.setSpacing(8);
+        vBox2 = new VBox();
+        vBox2.setSpacing(8);
+        vBox2.getChildren().addAll(hBox2,hBox3,hBox4);
 
         //Partie animee (jeu)
         Animated = new Group();
@@ -133,9 +166,9 @@ public class Main extends Application {
 
         System.out.println("JEU EXECUTE");
 
-       /* Jeu FlashMc = new Jeu ();
+       Jeu FlashMc = new Jeu ();
         FlashMc.nbVille=6;
-        FlashMc.init();*/
+        FlashMc.init();
 
         new AnimationTimer()//gestion de l'animation
         {
@@ -158,13 +191,69 @@ public class Main extends Application {
 
 
             }.start();
+
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                try {
+                    Integer.parseInt(textField.getText());
+                    System.out.println(Integer.parseInt(textField.getText()));
+                    for (Ville i:FlashMc.villes) {
+                        i.nbVehicules = (Integer.parseInt(textField.getText())/FlashMc.nbVille)/60;
+                    }
+
+                } catch(Exception u) {
+                    System.out.println("Entiers seulement!");
+                }
+                //System.out.println(textField.getText());
+            }
+        });
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                try {
+                    Integer.parseInt(textField2.getText());
+                    System.out.println(Integer.parseInt(textField2.getText()));
+                    //MOYENNE ICI
+
+
+                } catch(Exception u) {
+                    System.out.println("Entiers seulement!");
+                }
+                //System.out.println(textField.getText());
+            }
+        });
+
+        //Pas utilisee
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                try {
+                    Integer.parseInt(textField3.getText());
+                    System.out.println(Integer.parseInt(textField.getText()));
+                    for (Ville i:FlashMc.villes) {
+                        i.nbVehicules = (Integer.parseInt(textField.getText())/FlashMc.nbVille)/60;
+                    }
+
+                } catch(Exception u) {
+                    System.out.println("Entiers seulement!");
+                }
+                //System.out.println(textField.getText());
+            }
+        });
+        public void moy(){
+            int moyenne = 0;
+            for (Ville i:FlashMc.villes) {
+
+            }
+            textField4.setText((String)moyenne); //A changer sinin appelé 1 seule fois
+        }
     }
+
+
 
 
     public void changeToSmallLayout() {
         hBox.getChildren().clear();
         vBox.getChildren().clear();
-        vBox.getChildren().addAll(Animated, textLabel);
+        vBox.getChildren().addAll(Animated, vBox2);
         Pane.getChildren().clear();
         Pane.getChildren().add(vBox);
     }
@@ -172,7 +261,7 @@ public class Main extends Application {
     public void changeToLargeLayout() {
         hBox.getChildren().clear();
         vBox.getChildren().clear();
-        hBox.getChildren().addAll(Animated, textLabel);
+        hBox.getChildren().addAll(Animated, vBox2);
         Pane.getChildren().clear();
         Pane.getChildren().add(hBox);
     }
