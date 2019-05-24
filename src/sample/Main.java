@@ -155,7 +155,7 @@ public class Main extends Application {
             }
         });
 
-        primaryStage.setScene(new Scene(mainPane, 900, 500));
+        primaryStage.setScene(new Scene(mainPane, 872, 490));
         primaryStage.setTitle("Simu 2.0");
         primaryStage.show();
         Image image2 = new Image(new FileInputStream("src/sample/sanic.png"));
@@ -173,11 +173,13 @@ public class Main extends Application {
         {
             int i = 0;
 
+
             public void handle(long currentNanoTime) {
                 i++;
 
                 System.out.println("test");
                 System.out.println("testdedef");
+
 
                 // FlashMc.DebutTour(Sanics);
 
@@ -187,6 +189,7 @@ public class Main extends Application {
                 circle.setCenterY(i);
                 circle.setRadius(5);
                 Sanics.getChildren().add(circle);
+                textField4.setText(String.valueOf(FlashMc.moyenne));
             }
 
 
@@ -214,9 +217,7 @@ public class Main extends Application {
                 try {
                     Integer.parseInt(textField2.getText());
                     System.out.println(Integer.parseInt(textField2.getText()));
-                    //utilise ca et tas ta moyenne frer
-                    // -> FlashMc.moyenne;
-                    // met la nouvelle moyenne saisie par lutilisateur dans FlashMc.coef
+                    FlashMc.coef = Integer.parseInt(textField2.getText());
 
                 } catch (Exception u) {
                     System.out.println("Entiers seulement!");
@@ -226,7 +227,7 @@ public class Main extends Application {
         });
 
         //Pas utilisee
-        button3.setOnAction(new EventHandler<ActionEvent>() {
+        /*button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 try {
@@ -241,7 +242,7 @@ public class Main extends Application {
                 }
                 //System.out.println(textField.getText());
             }
-        });
+        });*/
     }
 
 
